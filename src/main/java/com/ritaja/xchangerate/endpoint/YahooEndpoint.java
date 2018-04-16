@@ -85,7 +85,7 @@ public class YahooEndpoint extends EndpointFactory {
 		for (int i = 0; i < resources.length(); ++i) {
 			JSONObject field = resources.getJSONObject(i).getJSONObject("resource").getJSONObject("fields");
 			if(field.length() > 0){
-			if (field.getString("name").equalsIgnoreCase("USD/" + currency.toString())) {
+			if (field.has("name") && field.getString("name").equalsIgnoreCase("USD/" + currency.toString())) {
 				rate.put(currency, new BigDecimal(field.getString("price")));
 				return Long.parseLong(field.getString("ts"), 10) * 1000;
 			}
